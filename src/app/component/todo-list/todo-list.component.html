@@ -1,0 +1,41 @@
+  <form #tempForm= "ngForm" (ngSubmit)="tempForm.reset()">
+  <div class="form-group">
+  <label for="TaskId">TASK ID:</label>
+  <input [(ngModel)]="taskId" name="id" type="number" class="form-control" placeholder="Enter task id" id="taskId" >
+</div>
+
+
+<div class="form-group">
+  <label for="taskDetails">TASKS:</label>
+<input [(ngModel)]="taskDetails" name="task" type="text" class="form-control" placeholder="Enter task details" id="taskDetails" >
+</div> 
+
+<button type="submit" class="btn btn-primary" (click)="onSave(taskId,taskDetails)">Add</button>
+ 
+<br>
+</form>
+
+<div class="container">
+  <table *ngIf="todoArray" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Task Id</th>
+        <th>Task Details</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let todo of todoArray">
+        <td>{{todo.id}}</td>
+        <td>{{todo.task}}</td>
+        <td [ngClass]="todo.id ? 'null' : 'strikethrough'" >{{todo.id}} </td>
+        <td>
+          <button class="btn btn-success btn-xs"><i class="material-icons" (click)="onComplete(todo)">done</i></button>
+          <button class="btn btn-danger btn-xs"><i class="material-icons" (click)="onDelete(todo.id)">delete</i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>
